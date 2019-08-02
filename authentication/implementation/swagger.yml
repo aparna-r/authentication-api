@@ -26,9 +26,9 @@ paths:
             $ref: "#/definitions/OnlineAccount"
       responses:
         201:
-          $ref: "#/definitions/ApiResponse"
+          description: "Account Created Successfully"
         404:
-          $ref: "#/definitions/ApiResponse"
+          $ref: "#/definitions/ErrorResponse"
 
   /login:
     post:
@@ -44,17 +44,17 @@ paths:
       parameters:
         - in: "body"
           name: "body"
-          description: "Login details to be added"
+          description: "Login details to be used"
           required: true
           schema:
             $ref: "#/definitions/login"
       responses:
         200:
-          $ref: "#/definitions/ApiResponse"
+          $ref: "#/definitions/jwtResponse"
         401:
-          $ref: "#/definitions/ApiResponse"
+          $ref: "#/definitions/ErrorResponse"
         403:
-          $ref: "#/definitions/ApiResponse"
+          $ref: "#/definitions/ErrorResponse"
 
 definitions:
   OnlineAccount:
@@ -67,8 +67,6 @@ definitions:
         type: "string"
       password:
         type: "string"
-    xml:
-      name: "Order"
   login:
     type: "object"
     properties:
@@ -76,7 +74,13 @@ definitions:
         type: "string"
       password:
         type: "string"
-  ApiResponse:
+  jwtResponse:
+    type: "object"
+    properties:
+      jwt:
+        type: "string"
+        description: "Generated Jwt Token"
+  ErrorResponse:
     type: "object"
     properties:
       code:

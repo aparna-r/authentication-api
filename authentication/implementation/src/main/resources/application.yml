@@ -1,7 +1,7 @@
 server:
   port: 8084
   ssl:
-    enabled: false
+    enabled: true
     key-store: classpath:server-keystore.jks
     key-store-password: changeit
     key-store-type: JCEKS
@@ -36,5 +36,5 @@ jwt:
 login:
   max-failed-attempts: 3
   failed-attempts-duration: 30m
-  block-duration: 5s
+  block-duration: 24h
   cache-size: 1000
