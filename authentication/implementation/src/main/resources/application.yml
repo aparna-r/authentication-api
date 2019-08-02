@@ -1,0 +1,40 @@
+server:
+  port: 8084
+  ssl:
+    enabled: false
+    key-store: classpath:server-keystore.jks
+    key-store-password: changeit
+    key-store-type: JCEKS
+    key-alias: authentication-api
+    key-password: changeit
+    trust-store: classpath:server-truststore.jks
+    trust-store-password: changeit
+    trust-store-type: JCEKS
+    client-auth: need
+
+bcrypt:
+  strength: 10
+
+http:
+  client:
+    max-connection: 10
+    max-connection-per-route: 10
+    connection-timeout: 10s
+    read-timeout: 10s
+
+upstream:
+  account-api:
+    base-url: https://localhost:8444
+    account-uri: /accounts/{accountNumber}
+
+jwt:
+  token:
+    issuer: authentication-api
+    ttl: 30m
+    secret: not-so-secret-password-for-signature
+
+login:
+  max-failed-attempts: 3
+  failed-attempts-duration: 30m
+  block-duration: 5s
+  cache-size: 1000

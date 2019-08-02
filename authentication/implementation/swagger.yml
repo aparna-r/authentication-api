@@ -1,0 +1,86 @@
+swagger: "2.0"
+info:
+  description: "This is an authentication-api"
+  version: "1.0.0"
+  title: "Authentication API"
+  termsOfService: ""
+  contact:
+    email: "aparnaras2006@gmail.com"
+schemes:
+  - "https"
+paths:
+  /online-accounts:
+    post:
+      tags:
+        - "online-account"
+      description: ""
+      operationId: "addAccount"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Account details to be added"
+          required: true
+          schema:
+            $ref: "#/definitions/OnlineAccount"
+      responses:
+        201:
+          $ref: "#/definitions/ApiResponse"
+        404:
+          $ref: "#/definitions/ApiResponse"
+
+  /login:
+    post:
+      tags:
+        - "Login"
+      summary: "Logs user into the system"
+      description: ""
+      operationId: "loginUser"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Login details to be added"
+          required: true
+          schema:
+            $ref: "#/definitions/login"
+      responses:
+        200:
+          $ref: "#/definitions/ApiResponse"
+        401:
+          $ref: "#/definitions/ApiResponse"
+        403:
+          $ref: "#/definitions/ApiResponse"
+
+definitions:
+  OnlineAccount:
+    type: "object"
+    properties:
+      accountNumber:
+        type: "string"
+        description: "Account Number"
+      username:
+        type: "string"
+      password:
+        type: "string"
+    xml:
+      name: "Order"
+  login:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"
